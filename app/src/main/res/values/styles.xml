@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="octogon_shape_button" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">30%</item>
+
+    </style>
+
+
+    <style name="refresh_button" parent="">
+        <item name="backgroundColor">@color/white</item>
+    </style>
+
+    <!-- metadonnée normal size start -->
+    <style name="metadonnée_normal_textview" >
+        <item name="android:fontFamily">@font/cousine</item>
+        <item name="android:text">@string/app_name</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="metadonnée_normal_button" >
+        <item name="android:background">@drawable/drawable_background_button_metadonnes</item>
+        <item name="android:text">@string/activity_metadonne2</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- metadonnée normal size end -->
+
+
+</resources>

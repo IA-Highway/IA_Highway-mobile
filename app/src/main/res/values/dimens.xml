@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- metadonnée start -->
+    <dimen name="metadonnée_normal_textview">21sp</dimen>
+    <dimen name="metadonnée_normal_textview_small">14sp</dimen>
+    <dimen name="metadonnée_normal_button_textsize">16sp</dimen>
+    <dimen name="metadonnée_normal_button_textsize_small">10sp</dimen>
+    <dimen name="metadonnée_normal_button_width">280dp</dimen>
+    <dimen name="metadonnée_normal_button_padding_left">55sp</dimen>
+    <dimen name="metadonnée_normal_button_minheight">48dp</dimen>
+    <dimen name="metadonnée_normal_button_padding_top">10sp</dimen>
+    <dimen name="metadonnée_normal_button_padding_right">55sp</dimen>
+    <dimen name="metadonnée_normal_button_padding_bottom">10sp</dimen>
+    <!-- metadonnée end -->
+</resources>

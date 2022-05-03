@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background">#211134</color>
+    <color name="gradient_color_1_splash_view">#757BB0</color>
+    <color name="gradient_color_2_splash_view">#1C1734</color>
+    <color name="secondary_color_welcome_fragment">#A9A7BF</color>
+    <color name="gradient_color_1_button_welcome_fragment">#74619A</color>
+    <color name="gradient_color_2_button_welcome_fragment">#4B4B9F</color>
+    <color name="gradient_color_1_background_login_view">#7378AE</color>
+    <color name="gradient_color_2_background_login_view">#848BBE</color>
+    <color name="activity_image2_take_picture">#2a1c64</color>
+    <color name="activity_image2_titre">#341754</color>
+    <color name="activity_image2_camera">#66369e</color>
+    <color name="activity_metadonnee">#28143e</color>
+
+
+
+
+</resources>

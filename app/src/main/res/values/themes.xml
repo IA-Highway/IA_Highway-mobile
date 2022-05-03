@@ -1,0 +1,50 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.IAHighway" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="app_name_splash_view">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+
+    <style name="main_text_welcome_view">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textSize">25dp</item>
+    </style>
+
+    <style name="second_text_welcome_view">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+
+    </style>
+
+    <style name="third_text_welcome_view">
+        <item name="android:textColor">@color/secondary_color_welcome_fragment</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="button_Picture">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_marginLeft">35dp</item>
+        <item name="android:layout_marginRight">35dp</item>
+        <item name="android:layout_marginTop">35dp</item>
+        <item name="android:layout_marginBottom">35dp</item>
+    </style>
+
+</resources>

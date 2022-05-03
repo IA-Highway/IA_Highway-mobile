@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">IA-Highway</string>
+    <string name="app_name_splash_view">Machine Management App</string>
+    <string name="main_text_welcome_activity">Bienvenue \n sur \n IA-Highway</string>
+    <string name="main_text_card_welcome_activity">Eviter les dommages</string>
+    <string name="second_text_card_welcome_activity">Optimiser / <with></with>Automatiser <with></with>la maintenance \n des infrastructures</string>
+    <string name="button_welcome_activity">Commencez Maintenant</string>
+    <string name="image_activity_title">IA-Highway</string>
+    <string name="activity_image2_take_picture">Prendre une photo</string>
+    <string name="activity_image2_titre">Titre</string>
+    <string name="activity_metadonne2">Les métadonnées</string>
+</resources>
