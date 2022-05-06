@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/original shop/Desktop/IAHighway/app/src/main/res/layout-hdpi/activity_image2.xml" value="0.187890625" />
+        <entry key="..\:/Users/original shop/Desktop/IAHighway/app/src/main/res/layout/activity_image2.xml" value="1.8352272727272727" />
         <entry key="..\:/Users/yassi/AndroidStudioProjects/IAHighway/app/src/main/res/drawable-v24/drawable_background_button_welcome_view.xml" value="0.1435" />
         <entry key="..\:/Users/yassi/AndroidStudioProjects/IAHighway/app/src/main/res/drawable-v24/drawable_background_login_view.xml" value="0.1435" />
         <entry key="..\:/Users/yassi/AndroidStudioProjects/IAHighway/app/src/main/res/drawable/drawable_background_button_metadonnes.xml" value="0.1355" />
@@ -38,6 +40,17 @@
         <entry key="..\:/Users/yassi/AndroidStudioProjects/IAHighway/app/src/main/res/layout/activity_welcome.xml" value="1.2" />
         <entry key="..\:/Users/yassi/AndroidStudioProjects/IAHighway/app/src/main/res/layout/item_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/yassi/AndroidStudioProjects/IAHighway/app/src/main/res/layout/metadonne2.xml" value="1.2" />
+        <entry key="app/src/main/res/layout-hdpi/activity_image2.xml" value="0.24351092896174864" />
+        <entry key="app/src/main/res/layout-hdpi/metadonne2.xml" value="0.20935792349726776" />
+        <entry key="app/src/main/res/layout-mdpi/activity_image2.xml" value="1.0363372093023255" />
+        <entry key="app/src/main/res/layout-xhdpi/activity_image2.xml" value="0.29125816993464054" />
+        <entry key="app/src/main/res/layout-xxhdpi/activity_image2.xml" value="0.31837606837606836" />
+        <entry key="app/src/main/res/layout-xxhdpi/activity_welcome.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout-xxxhdpi/activity_image2.xml" value="0.24351092896174864" />
+        <entry key="app/src/main/res/layout-xxxhdpi/metadonne2.xml" value="0.20935792349726776" />
+        <entry key="app/src/main/res/layout/activity_image2.xml" value="0.610236220472441" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.29125816993464054" />
+        <entry key="app/src/main/res/layout/metadonne2.xml" value="1.1609848484848484" />
       </map>
     </option>
   </component>

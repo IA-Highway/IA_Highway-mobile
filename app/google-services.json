@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "324356895130",
+    "firebase_url": "https://ia-highway-37627-default-rtdb.firebaseio.com",
+    "project_id": "ia-highway-37627",
+    "storage_bucket": "ia-highway-37627.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324356895130:android:75de62f54e5551dce1ca23",
+        "android_client_info": {
+          "package_name": "com.example.ia_highway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324356895130-jqensp32of3ee76p95dd8rnfdirb9gnp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArite9709hCI9eMZuWwWc2eYalzFi4PhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324356895130-jqensp32of3ee76p95dd8rnfdirb9gnp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
