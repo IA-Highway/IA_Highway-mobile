@@ -19,8 +19,7 @@
     <color name="activity_image2_titre">#341754</color>
     <color name="activity_image2_camera">#66369e</color>
     <color name="activity_metadonnee">#28143e</color>
-
-
-
-
+    <color name="date_item_layout">#949596</color>
+    <color name="location_item_layout">#339D5C</color>
+    <color name="background_item_layout">#2A2C5C</color>
 </resources>
