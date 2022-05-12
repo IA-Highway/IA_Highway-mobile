@@ -1,38 +1,57 @@
 package com.example.ia_highway.models;
 
 public class Image {
-    String urlImage;
-    String capturedDate;
-    Location location;
+    String file_url;
+    String date_captured;
+    gps_location gps_location;
+    double width, height;
 
-    public Image(String urlImage, String capturedDate, Location location) {
-        this.urlImage = urlImage;
-        this.capturedDate = capturedDate;
-        this.location = location;
+    public Image(String file_url, String date_captured, com.example.ia_highway.models.gps_location gps_location, double width, double height) {
+        this.file_url = file_url;
+        this.date_captured = date_captured;
+        this.gps_location = gps_location;
+        this.width = width;
+        this.height = height;
     }
 
-    public String getUrlImage() {
-        return urlImage;
+    public String getFile_url() {
+        return file_url;
     }
 
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public void setFile_url(String file_url) {
+        this.file_url = file_url;
     }
 
-    public String getCapturedDate() {
-        return capturedDate;
+    public String getDate_captured() {
+        return date_captured;
     }
 
-    public void setCapturedDate(String capturedDate) {
-        this.capturedDate = capturedDate;
+    public void setDate_captured(String date_captured) {
+        this.date_captured = date_captured;
     }
 
-    public Location getLocation() {
-        return location;
+    public com.example.ia_highway.models.gps_location getGps_location() {
+        return gps_location;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setGps_location(com.example.ia_highway.models.gps_location gps_location) {
+        this.gps_location = gps_location;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
     }
 
     public Image() {

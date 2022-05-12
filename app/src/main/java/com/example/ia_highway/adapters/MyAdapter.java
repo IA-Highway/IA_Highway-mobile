@@ -23,16 +23,16 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Image, MyAdapter.myviewho
     @Override
     protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Image model) {
         holder.description.setText("Description ici");
-        holder.date.setText(model.getCapturedDate());
+        holder.date.setText(model.getDate_captured());
 
         //Convert String to int and get the Integer Value
-        float longitude = Float.parseFloat(model.getLocation().getLongitude());
-        float latitude = Float.parseFloat(model.getLocation().getLatitude());
+        double longitude = model.getGps_location().getLongitude();
+        double latitude = model.getGps_location().getLatitude();
         int longitudeSimplifie = (int) longitude;
         int latitudeSimplifie = (int) latitude;
 
         holder.location.setText(longitudeSimplifie + ", " + latitudeSimplifie);
-        Glide.with(holder.img.getContext()).load(model.getUrlImage()).into(holder.img);
+        Glide.with(holder.img.getContext()).load(model.getFile_url()).into(holder.img);
     }
 
     @NonNull

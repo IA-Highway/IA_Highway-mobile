@@ -26,7 +26,10 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.ia_highway.models.Image;
+import com.example.ia_highway.models.gps_location;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,10 +52,10 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     private ImageView image;
     private Bitmap bitmap = null;
     private LocationManager locationManager;
-    private String latitude, longitude;
+    private Double latitude, longitude;
     private Date capturedDate;
     private Uri uri;
-
+    private double width, height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,10 +113,11 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                             public void onSuccess(Uri uri) {
                                 FirebaseDatabase db = FirebaseDatabase.getInstance();
                                 DatabaseReference root = db.getReference("images");
-                                com.example.ia_highway.models.Location location =
-                                        new com.example.ia_highway.models.Location(longitude,
+                                gps_location location =
+                                        new gps_location(longitude,
                                                 latitude);
-                                Image image = new Image(uri.toString(), capturedDate.toString(), location);
+                                Image image = new Image(uri.toString(), capturedDate.toString(),
+                                        location, width, height);
                                 root.child(imageName).setValue(image);
                                 Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_LONG).show();
                             }
@@ -141,9 +145,18 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
             }
             Glide
                     .with(getApplicationContext())
+                    .asBitmap()
                     .load(uri)
                     .apply(RequestOptions.fitCenterTransform())
-                    .into(image);
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap bitmap,
+                                                    Transition<? super Bitmap> transition) {
+                            width = bitmap.getWidth();
+                            height = bitmap.getHeight();
+                            image.setImageBitmap(bitmap);
+                        }
+                    });
         }
 
     }
@@ -176,8 +189,8 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        latitude = String.valueOf(location.getLatitude());
-        longitude = String.valueOf(location.getLongitude());
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
     }
 
     @Override
