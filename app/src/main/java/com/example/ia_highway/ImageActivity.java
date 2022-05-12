@@ -26,6 +26,8 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.ia_highway.models.Image;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,6 +54,8 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     private String latitude, longitude;
     private Date capturedDate;
     private Uri uri;
+    private float width;
+    private float height;
 
 
     @Override
@@ -110,7 +114,9 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                                 com.example.ia_highway.models.Location location =
                                         new com.example.ia_highway.models.Location(longitude,
                                                 latitude);
-                                Image image = new Image(uri.toString(), capturedDate.toString(), location);
+                                Log.d("width1",String.valueOf(width));
+                                Log.d("width11",String.valueOf(height));
+                                Image image = new Image(uri.toString(), capturedDate.toString(), location , String.valueOf(width) , String.valueOf(height));
                                 root.child(imageName).setValue(image);
                                 Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_LONG).show();
                             }
@@ -138,9 +144,21 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
             }
             Glide
                     .with(getApplicationContext())
+                    .asBitmap()
                     .load(uri)
                     .apply(RequestOptions.fitCenterTransform())
-                    .into(image);
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap bitmap,
+                                                    Transition<? super Bitmap> transition) {
+                             width = bitmap.getWidth();
+                             height = bitmap.getHeight();
+                            image.setImageBitmap(bitmap);
+                            Log.d("width",String.valueOf(width));
+                            Log.d("height",String.valueOf(height));
+                        }
+                    });
+
         }
 
     }
