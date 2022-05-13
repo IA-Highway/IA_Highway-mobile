@@ -88,17 +88,14 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <Button
+    <EditText
         android:id="@+id/button_metadonnees"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/drawable_background_button_titre"
         android:minHeight="48dp"
-        android:paddingLeft="55sp"
-        android:paddingTop="12dp"
-        android:paddingRight="55sp"
-        android:paddingBottom="12dp"
+        android:gravity="center"
         android:text="@string/activity_image2_titre"
         android:textColor="@color/white"
         android:textSize="18sp"

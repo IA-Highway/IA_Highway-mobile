@@ -1,10 +1,10 @@
 package com.example.ia_highway.cadrage;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -17,7 +17,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.ia_highway.R;
+import com.example.ia_highway.bitmapHelper.BitmapHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +33,7 @@ public class SomeView extends View implements View.OnTouchListener {
 
     Point mlastpoint = null;
 
-    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-            R.drawable.test);
+    Bitmap bitmap = BitmapHelper.getInstance().getBitmap(); //get bitmap stored in instance
     Context mContext;
 
     public SomeView(Context c) {
@@ -128,7 +127,6 @@ public class SomeView extends View implements View.OnTouchListener {
 
         invalidate();
         Log.e("Hi  ==>", "Size: " + point.x + " " + point.y);
-
         if (event.getAction() == MotionEvent.ACTION_UP) {
             mlastpoint = point;
             if (flgPathDraw) {
@@ -190,26 +188,21 @@ public class SomeView extends View implements View.OnTouchListener {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         // Yes button clicked
-                        // bfirstpoint = false;
-
+                        ((Activity) mContext).finish();
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
                         // No button clicked
-
-
-                        bfirstpoint = false;
-                        // resetView();
-
+                        resetView();
                         break;
                 }
             }
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setMessage("Do you Want to save Crop or Non-crop image?")
-                .setPositiveButton("Crop", dialogClickListener)
-                .setNegativeButton("Non-crop", dialogClickListener).show()
+        builder.setMessage("Voulez vous continuez?")
+                .setPositiveButton("Ajouté", dialogClickListener)
+                .setNegativeButton("Modifier", dialogClickListener).show()
                 .setCancelable(false);
     }
 }

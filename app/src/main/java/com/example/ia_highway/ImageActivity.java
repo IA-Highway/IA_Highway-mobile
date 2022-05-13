@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.ia_highway.bitmapHelper.BitmapHelper;
 import com.example.ia_highway.cadrage.PopUp;
 import com.example.ia_highway.models.Image;
 import com.example.ia_highway.models.gps_location;
@@ -57,6 +59,8 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     private Date capturedDate;
     private Uri uri;
     private double width, height;
+    private EditText descriptionEditText;
+    private String description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         image = findViewById(R.id.imageView3);
         button = findViewById(R.id.button_Picture);
         addDataButton = findViewById(R.id.floatingActionButton);
+        descriptionEditText = findViewById(R.id.button_metadonnees);
         if (ContextCompat.checkSelfPermission(ImageActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(ImageActivity.this, new String[]{
@@ -90,8 +95,10 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         addDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onLocationChanged: " + latitude + "/" + longitude);
+                Log.d("Location", "onLocationChanged: " + latitude + "/" + longitude);
                 Log.d("Date", "capturedDate: " + capturedDate);
+                description = descriptionEditText.getText().toString();
+                Log.d("Description", description);
                 uploadToFirebase();
                 Intent i = new Intent(getApplicationContext(), MetadoneeActivity.class);
                 startActivity(i);
@@ -142,10 +149,11 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
             try {
                 getCapturedDate();
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                //Show popup to draw polygon
-                //TODO: send bitmap to popup
-                Intent itent = new Intent(this, PopUp.class);
+                //create instance of bitmap with BitmapHelper Class
+                BitmapHelper.getInstance().setBitmap(bitmap);
+                Intent itent = new Intent(this, PopUp.class); //Show popup to draw polygon
                 startActivity(itent);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -166,6 +174,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
+
 
     private void getCapturedDate() {
         Date c = Calendar.getInstance().getTime();
