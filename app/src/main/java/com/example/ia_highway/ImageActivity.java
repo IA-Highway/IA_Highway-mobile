@@ -61,6 +61,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     private double width, height;
     private EditText descriptionEditText;
     private String description;
+    private boolean imageCharged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +100,20 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                 Log.d("Date", "capturedDate: " + capturedDate);
                 description = descriptionEditText.getText().toString();
                 Log.d("Description", description);
-                uploadToFirebase();
-                Intent i = new Intent(getApplicationContext(), MetadoneeActivity.class);
-                startActivity(i);
-                finish();
+                if (description.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Veuillez rajouter une description",
+                            Toast.LENGTH_LONG).show();
+                } else if (!imageCharged) {
+                    Toast.makeText(getApplicationContext(), "Veuillez importer ou capturer une " +
+                                    "image",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    uploadToFirebase();
+                    Intent i = new Intent(getApplicationContext(), MetadoneeActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+
             }
         });
     }
@@ -149,6 +160,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
             try {
                 getCapturedDate();
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                imageCharged = true;
                 //create instance of bitmap with BitmapHelper Class
                 BitmapHelper.getInstance().setBitmap(bitmap);
                 Intent itent = new Intent(this, PopUp.class); //Show popup to draw polygon

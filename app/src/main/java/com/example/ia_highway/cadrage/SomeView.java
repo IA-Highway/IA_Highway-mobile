@@ -72,6 +72,7 @@ public class SomeView extends View implements View.OnTouchListener {
 
     }
 
+
     public void onDraw(Canvas canvas) {
         canvas.drawBitmap(bitmap, 0, 0, null);
 
