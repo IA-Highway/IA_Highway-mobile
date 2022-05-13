@@ -9,4 +9,6 @@
     <string name="activity_image2_take_picture">Prendre une photo</string>
     <string name="activity_image2_titre">Titre</string>
     <string name="activity_metadonne2">Les métadonnées</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

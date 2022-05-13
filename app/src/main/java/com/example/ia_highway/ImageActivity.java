@@ -28,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.ia_highway.cadrage.PopUp;
 import com.example.ia_highway.models.Image;
 import com.example.ia_highway.models.gps_location;
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -99,6 +100,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
+
     private void uploadToFirebase() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         final String imageName = "Image" + UUID.randomUUID().toString();
@@ -140,6 +142,10 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
             try {
                 getCapturedDate();
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                //Show popup to draw polygon
+                //TODO: send bitmap to popup
+                Intent itent = new Intent(this, PopUp.class);
+                startActivity(itent);
             } catch (IOException e) {
                 e.printStackTrace();
             }
