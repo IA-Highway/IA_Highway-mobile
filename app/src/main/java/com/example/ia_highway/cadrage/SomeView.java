@@ -18,6 +18,8 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.ia_highway.bitmapHelper.BitmapHelper;
+import com.example.ia_highway.helpers.PointListHelper;
+import com.example.ia_highway.models.Point;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +34,10 @@ public class SomeView extends View implements View.OnTouchListener {
     boolean bfirstpoint = false;
 
     Point mlastpoint = null;
-
+    int countPoints = 0;
     Bitmap bitmap = BitmapHelper.getInstance().getBitmap(); //get bitmap stored in instance
     Context mContext;
+    private static List<Point> listPoints;
 
     public SomeView(Context c) {
         super(c);
@@ -51,7 +54,7 @@ public class SomeView extends View implements View.OnTouchListener {
 
         this.setOnTouchListener(this);
         points = new ArrayList<Point>();
-
+        listPoints = new ArrayList<Point>();
         bfirstpoint = false;
     }
 
@@ -127,7 +130,12 @@ public class SomeView extends View implements View.OnTouchListener {
         }
 
         invalidate();
-        Log.e("Hi  ==>", "Size: " + point.x + " " + point.y);
+
+        //Copy the list to a new list 'listPoints' and delete the repetition of points
+        if (countPoints % 2 == 0) {
+            listPoints.add(new Point(point.x, point.y));
+        }
+        countPoints++;
         if (event.getAction() == MotionEvent.ACTION_UP) {
             mlastpoint = point;
             if (flgPathDraw) {
@@ -174,7 +182,9 @@ public class SomeView extends View implements View.OnTouchListener {
     }
 
     public void resetView() {
+        listPoints.clear();
         points.clear();
+        countPoints = 0;
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.STROKE);
         flgPathDraw = true;
@@ -189,9 +199,10 @@ public class SomeView extends View implements View.OnTouchListener {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         // Yes button clicked
+                        Log.e("list", listPoints.toString());
+                        PointListHelper.getInstance().setListPoints(listPoints);
                         ((Activity) mContext).finish();
                         break;
-
                     case DialogInterface.BUTTON_NEGATIVE:
                         // No button clicked
                         resetView();
@@ -208,16 +219,3 @@ public class SomeView extends View implements View.OnTouchListener {
     }
 }
 
-
-class Point {
-
-    public float dy;
-    public float dx;
-    float x, y;
-
-    @Override
-    public String toString() {
-        return x + ", " + y;
-    }
-
-}

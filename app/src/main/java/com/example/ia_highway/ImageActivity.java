@@ -31,7 +31,9 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.ia_highway.bitmapHelper.BitmapHelper;
 import com.example.ia_highway.cadrage.PopUp;
+import com.example.ia_highway.helpers.PointListHelper;
 import com.example.ia_highway.models.Image;
+import com.example.ia_highway.models.Point;
 import com.example.ia_highway.models.gps_location;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,6 +46,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -62,6 +65,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     private EditText descriptionEditText;
     private String description;
     private boolean imageCharged = false;
+    List<Point> listPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         button = findViewById(R.id.button_Picture);
         addDataButton = findViewById(R.id.floatingActionButton);
         descriptionEditText = findViewById(R.id.button_metadonnees);
+        listPoint = new ArrayList<>();
         if (ContextCompat.checkSelfPermission(ImageActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(ImageActivity.this, new String[]{
@@ -124,6 +129,9 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         final String imageName = "Image" + UUID.randomUUID().toString();
         Log.d("imageName", imageName);
         final StorageReference uploader = storage.getReference("images/" + imageName);
+        //getListFromPopUp
+        listPoint = PointListHelper.getInstance().getListPoints();
+        Log.d("list Added ", listPoint.toString());
         uploader.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
