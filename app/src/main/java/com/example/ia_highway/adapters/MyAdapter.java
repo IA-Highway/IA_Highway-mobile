@@ -23,8 +23,11 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Image, MyAdapter.myviewho
 
     @Override
     protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Image model) {
-
-        holder.description.setText("delete null ");
+        if(model.getObjectlist() != null){
+            holder.description.setText(model.getObjectlist().get(0).getDescription().toString());
+        }
+        else
+            holder.description.setText("delete null ");
         holder.date.setText(model.getDate_captured());
 
         //Convert String to int and get the Integer Value
