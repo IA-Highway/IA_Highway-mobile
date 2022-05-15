@@ -1,5 +1,6 @@
 package com.example.ia_highway.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,8 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Image, MyAdapter.myviewho
 
     @Override
     protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Image model) {
-        holder.description.setText("Description ici");
+
+        holder.description.setText("delete null ");
         holder.date.setText(model.getDate_captured());
 
         //Convert String to int and get the Integer Value

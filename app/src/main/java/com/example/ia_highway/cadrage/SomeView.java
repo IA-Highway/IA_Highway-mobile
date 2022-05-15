@@ -18,7 +18,7 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.ia_highway.bitmapHelper.BitmapHelper;
-import com.example.ia_highway.helpers.PointListHelper;
+import com.example.ia_highway.models.ListHelper;
 import com.example.ia_highway.models.Point;
 
 import java.util.ArrayList;
@@ -200,7 +200,7 @@ public class SomeView extends View implements View.OnTouchListener {
                     case DialogInterface.BUTTON_POSITIVE:
                         // Yes button clicked
                         Log.e("list", listPoints.toString());
-                        PointListHelper.getInstance().setListPoints(listPoints);
+                        ListHelper.getInstance().setListPoints(listPoints);
                         ((Activity) mContext).finish();
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:

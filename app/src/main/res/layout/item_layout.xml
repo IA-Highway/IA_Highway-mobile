@@ -39,7 +39,6 @@
                 android:id="@+id/item_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="TextView"
                 android:textColor="@color/white"
@@ -50,6 +49,7 @@
                 android:id="@+id/item_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="TextView"
                 android:textColor="@color/date_item_layout" />

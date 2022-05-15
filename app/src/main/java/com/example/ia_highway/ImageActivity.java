@@ -37,9 +37,11 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.ia_highway.bitmapHelper.BitmapHelper;
 import com.example.ia_highway.cadrage.PopUp;
-import com.example.ia_highway.helpers.PointListHelper;
+import com.example.ia_highway.models.Object;
+import com.example.ia_highway.models.ListHelper;
 import com.example.ia_highway.models.Image;
 import com.example.ia_highway.models.Point;
+import com.example.ia_highway.models.Polygon;
 import com.example.ia_highway.models.gps_location;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -71,7 +73,13 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     private EditText descriptionEditText;
     private String description;
     private boolean imageCharged = false;
-    List<Point> listPoint;
+    private List<Point> listPoint;
+    private List<Object> objectList;
+    private List<Polygon> polygonList;
+    private Float maxxa = 0f;
+    private Float maxya =0f;
+    private Float minxa =0f;
+    private Float minya =0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,9 +143,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         final String imageName = "Image" + UUID.randomUUID().toString();
         Log.d("imageName", imageName);
         final StorageReference uploader = storage.getReference("images/" + imageName);
-        //getListFromPopUp
-        listPoint = PointListHelper.getInstance().getListPoints();
-        Log.d("list Added ", listPoint.toString());
+
         uploader.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -147,11 +153,45 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                             public void onSuccess(Uri uri) {
                                 FirebaseDatabase db = FirebaseDatabase.getInstance();
                                 DatabaseReference root = db.getReference("images");
+
+                                //getListFromPopUp
+                                objectList=new ArrayList<>();
+                                polygonList=new ArrayList<>();
+                                listPoint = ListHelper.getInstance().getListPoints();
+                                Log.d("listAdded ", listPoint.toString());
+                                polygonList.add(new Polygon(listPoint));
+                                //get min x y and max x y from polygon list which contains list of Point
+                                maxxa = getMaxX(polygonList.get(0).getPointList());
+                                maxya = getMaxY(polygonList.get(0).getPointList());
+                                minxa = getMinX(polygonList.get(0).getPointList());
+                                minya = getMinY(polygonList.get(0).getPointList());
+                                for (int i=1;i<polygonList.size();i++) {
+                                    if(getMaxX(polygonList.get(i).getPointList()) > maxxa){
+                                        maxxa = getMaxX(polygonList.get(i).getPointList());
+                                    }
+                                    if(getMaxY(polygonList.get(i).getPointList()) > maxya){
+                                        maxya = getMaxY(polygonList.get(i).getPointList());
+                                    }
+                                    if(getMinX(polygonList.get(i).getPointList()) < minxa){
+                                        minxa = getMinX(polygonList.get(i).getPointList());
+                                    }
+                                    if(getMinY(polygonList.get(i).getPointList()) < minya){
+                                        minya = getMinY(polygonList.get(i).getPointList());
+                                    }
+                                }
+                                Log.d("maxxa->","maxxa"+maxxa);
+                                Log.d("maxya->","maxya"+maxya);
+                                Log.d("minxa->","minxa"+minxa);
+                                Log.d("minya->","minya"+minya);
+                                objectList.add(new Object(description,polygonList,minya,minxa,maxya,maxxa));
+                                Log.d("Objectlist->","--->  "+objectList.toString());
+
                                 gps_location location =
-                                        new gps_location(longitude,
-                                                latitude);
+                                        new gps_location(longitude, latitude);
+
                                 Image image = new Image(uri.toString(), capturedDate.toString(),
-                                        location, width, height);
+                                        location, width, height,objectList);
+
                                 root.child(imageName).setValue(image);
                                 Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_LONG).show();
                             }
@@ -279,5 +319,45 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onProviderDisabled(@NonNull String provider) {
         LocationListener.super.onProviderDisabled(provider);
+    }
+    // get max x from Point list
+    private Float getMaxX(List<Point> point){
+        Float max = point.get(0).x;
+        for (int i = 1; i < point.size(); i++) {
+            if (point.get(i).x > max) {
+                max = point.get(i).x;
+            }
+        }
+        return max;
+    }
+    // get max Y from Point list
+    private Float getMaxY(List<Point> point){
+        Float max = point.get(0).y;
+        for (int i = 1; i < point.size(); i++) {
+            if (point.get(i).y > max) {
+                max = point.get(i).y;
+            }
+        }
+        return max;
+    }
+    // get min Y from Point list
+    private Float getMinY(List<Point> point){
+        Float min = point.get(0).y;
+        for (int i = 1; i < point.size(); i++) {
+            if (point.get(i).y < min) {
+                min = point.get(i).y;
+            }
+        }
+        return min;
+    }
+    // get min X from Point list
+    private Float getMinX(List<Point> point){
+        Float min = point.get(0).x;
+        for (int i = 1; i < point.size(); i++) {
+            if (point.get(i).x < min) {
+                min = point.get(i).x;
+            }
+        }
+        return min;
     }
 }

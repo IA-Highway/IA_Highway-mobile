@@ -1,17 +1,24 @@
 package com.example.ia_highway.models;
 
+import java.util.List;
+
 public class Image {
     String file_url;
     String date_captured;
     gps_location gps_location;
     double width, height;
+    List<Object> objectlist;
 
-    public Image(String file_url, String date_captured, com.example.ia_highway.models.gps_location gps_location, double width, double height) {
+    public Image(){
+
+    }
+    public Image(String file_url, String date_captured, com.example.ia_highway.models.gps_location gps_location, double width, double height, List<Object> objectlist) {
         this.file_url = file_url;
         this.date_captured = date_captured;
         this.gps_location = gps_location;
         this.width = width;
         this.height = height;
+        this.objectlist = objectlist;
     }
 
     public String getFile_url() {
@@ -54,6 +61,11 @@ public class Image {
         this.height = height;
     }
 
-    public Image() {
+    public List<Object> getObjectlist() {
+        return objectlist;
+    }
+
+    public void setObjectlist(List<Object> objectlist) {
+        this.objectlist = objectlist;
     }
 }
