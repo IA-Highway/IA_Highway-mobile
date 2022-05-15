@@ -37,11 +37,11 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.ia_highway.bitmapHelper.BitmapHelper;
 import com.example.ia_highway.cadrage.PopUp;
-import com.example.ia_highway.models.Object;
+import com.example.ia_highway.models.hotspots;
 import com.example.ia_highway.models.ListHelper;
-import com.example.ia_highway.models.Image;
-import com.example.ia_highway.models.Point;
-import com.example.ia_highway.models.Polygon;
+import com.example.ia_highway.models.imagemap;
+import com.example.ia_highway.models.Coords;
+import com.example.ia_highway.models.Shape;
 import com.example.ia_highway.models.gps_location;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -73,9 +73,9 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     private EditText descriptionEditText;
     private String description;
     private boolean imageCharged = false;
-    private List<Point> listPoint;
-    private List<Object> objectList;
-    private List<Polygon> polygonList;
+    private List<Coords> listPoint;
+    private List<hotspots> objectList;
+    private List<Shape> polygonList;
     private Float maxxa = 0f;
     private Float maxya =0f;
     private Float minxa =0f;
@@ -157,39 +157,39 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                                 //getListFromPopUp
                                 objectList=new ArrayList<>();
                                 polygonList=new ArrayList<>();
-                                listPoint = ListHelper.getInstance().getListPoints();
+                                listPoint = ListHelper.getInstance().getCoords();
                                 Log.d("listAdded ", listPoint.toString());
-                                polygonList.add(new Polygon(listPoint));
+                                polygonList.add(new Shape(listPoint));
                                 //get min x y and max x y from polygon list which contains list of Point
-                                maxxa = getMaxX(polygonList.get(0).getPointList());
-                                maxya = getMaxY(polygonList.get(0).getPointList());
-                                minxa = getMinX(polygonList.get(0).getPointList());
-                                minya = getMinY(polygonList.get(0).getPointList());
+                                maxxa = getMaxX(polygonList.get(0).getCoords());
+                                maxya = getMaxY(polygonList.get(0).getCoords());
+                                minxa = getMinX(polygonList.get(0).getCoords());
+                                minya = getMinY(polygonList.get(0).getCoords());
                                 for (int i=1;i<polygonList.size();i++) {
-                                    if(getMaxX(polygonList.get(i).getPointList()) > maxxa){
-                                        maxxa = getMaxX(polygonList.get(i).getPointList());
+                                    if(getMaxX(polygonList.get(i).getCoords()) > maxxa){
+                                        maxxa = getMaxX(polygonList.get(i).getCoords());
                                     }
-                                    if(getMaxY(polygonList.get(i).getPointList()) > maxya){
-                                        maxya = getMaxY(polygonList.get(i).getPointList());
+                                    if(getMaxY(polygonList.get(i).getCoords()) > maxya){
+                                        maxya = getMaxY(polygonList.get(i).getCoords());
                                     }
-                                    if(getMinX(polygonList.get(i).getPointList()) < minxa){
-                                        minxa = getMinX(polygonList.get(i).getPointList());
+                                    if(getMinX(polygonList.get(i).getCoords()) < minxa){
+                                        minxa = getMinX(polygonList.get(i).getCoords());
                                     }
-                                    if(getMinY(polygonList.get(i).getPointList()) < minya){
-                                        minya = getMinY(polygonList.get(i).getPointList());
+                                    if(getMinY(polygonList.get(i).getCoords()) < minya){
+                                        minya = getMinY(polygonList.get(i).getCoords());
                                     }
                                 }
                                 Log.d("maxxa->","maxxa"+maxxa);
                                 Log.d("maxya->","maxya"+maxya);
                                 Log.d("minxa->","minxa"+minxa);
                                 Log.d("minya->","minya"+minya);
-                                objectList.add(new Object(description,polygonList,minya,minxa,maxya,maxxa));
+                                objectList.add(new hotspots(description,polygonList,minya,minxa,maxya,maxxa));
                                 Log.d("Objectlist->","--->  "+objectList.toString());
 
                                 gps_location location =
                                         new gps_location(longitude, latitude);
 
-                                Image image = new Image(uri.toString(), capturedDate.toString(),
+                                imagemap image = new imagemap(uri.toString(), capturedDate.toString(),
                                         location, width, height,objectList);
 
                                 root.child(imageName).setValue(image);
@@ -321,7 +321,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         LocationListener.super.onProviderDisabled(provider);
     }
     // get max x from Point list
-    private Float getMaxX(List<Point> point){
+    private Float getMaxX(List<Coords> point){
         Float max = point.get(0).x;
         for (int i = 1; i < point.size(); i++) {
             if (point.get(i).x > max) {
@@ -331,7 +331,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         return max;
     }
     // get max Y from Point list
-    private Float getMaxY(List<Point> point){
+    private Float getMaxY(List<Coords> point){
         Float max = point.get(0).y;
         for (int i = 1; i < point.size(); i++) {
             if (point.get(i).y > max) {
@@ -341,7 +341,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         return max;
     }
     // get min Y from Point list
-    private Float getMinY(List<Point> point){
+    private Float getMinY(List<Coords> point){
         Float min = point.get(0).y;
         for (int i = 1; i < point.size(); i++) {
             if (point.get(i).y < min) {
@@ -351,7 +351,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         return min;
     }
     // get min X from Point list
-    private Float getMinX(List<Point> point){
+    private Float getMinX(List<Coords> point){
         Float min = point.get(0).x;
         for (int i = 1; i < point.size(); i++) {
             if (point.get(i).x < min) {

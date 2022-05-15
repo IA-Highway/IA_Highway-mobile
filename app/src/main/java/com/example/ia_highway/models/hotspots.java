@@ -2,38 +2,40 @@ package com.example.ia_highway.models;
 
 import java.util.List;
 
-public class Object {
-    private String description;
-    private List<Polygon> polygons;
+public class hotspots {
+    private String name;
+    private List<Shape> shape;
     Float ymin;
     Float xmin;
     Float ymax;
     Float xmax;
 
-    public Object(){}
-    public Object(String description, List<Polygon> polygons, Float ymin, Float xmin, Float ymax, Float xmax) {
-        this.description = description;
-        this.polygons = polygons;
+    public hotspots() {
+    }
+
+    public hotspots(String name, List<Shape> shape, Float ymin, Float xmin, Float ymax, Float xmax) {
+        this.name = name;
+        this.shape = shape;
         this.ymin = ymin;
         this.xmin = xmin;
         this.ymax = ymax;
         this.xmax = xmax;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<Polygon> getPolygons() {
-        return polygons;
+    public List<Shape> getShape() {
+        return shape;
     }
 
-    public void setPolygons(List<Polygon> polygons) {
-        this.polygons = polygons;
+    public void setShape(List<Shape> shape) {
+        this.shape = shape;
     }
 
     public Float getYmin() {
@@ -71,8 +73,8 @@ public class Object {
     @Override
     public String toString() {
         return "Object{" +
-                "description='" + description + '\'' +
-                ", polygons=" + polygons +
+                "description='" + name + '\'' +
+                ", polygons=" + shape +
                 ", ymin=" + ymin +
                 ", xmin=" + xmin +
                 ", ymax=" + ymax +

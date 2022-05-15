@@ -1,6 +1,5 @@
 package com.example.ia_highway.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.ia_highway.R;
-import com.example.ia_highway.models.Image;
+import com.example.ia_highway.models.imagemap;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class MyAdapter extends FirebaseRecyclerAdapter<Image, MyAdapter.myviewholder> {
-    public MyAdapter(@NonNull FirebaseRecyclerOptions<Image> options) {
+public class MyAdapter extends FirebaseRecyclerAdapter<imagemap, MyAdapter.myviewholder> {
+    public MyAdapter(@NonNull FirebaseRecyclerOptions<imagemap> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Image model) {
-        if(model.getObjectlist() != null){
-            holder.description.setText(model.getObjectlist().get(0).getDescription().toString());
-        }
-        else
+    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull imagemap model) {
+        if (model.getHotspots() != null) {
+            holder.description.setText(model.getHotspots().get(0).getName().toString());
+        } else
             holder.description.setText("delete null ");
         holder.date.setText(model.getDate_captured());
 

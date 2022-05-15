@@ -1,14 +1,14 @@
 package com.example.ia_highway.models;
 
-public class Point {
+public class Coords {
     public float x, y;
 
-    public Point(float x, float y) {
+    public Coords(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
-    public Point() {
+    public Coords() {
     }
 
     @Override

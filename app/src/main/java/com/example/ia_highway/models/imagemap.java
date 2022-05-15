@@ -2,23 +2,24 @@ package com.example.ia_highway.models;
 
 import java.util.List;
 
-public class Image {
+public class imagemap {
     String file_url;
     String date_captured;
     gps_location gps_location;
     double width, height;
-    List<Object> objectlist;
+    List<hotspots> hotspots;
 
-    public Image(){
+    public imagemap() {
 
     }
-    public Image(String file_url, String date_captured, com.example.ia_highway.models.gps_location gps_location, double width, double height, List<Object> objectlist) {
+
+    public imagemap(String file_url, String date_captured, com.example.ia_highway.models.gps_location gps_location, double width, double height, List<hotspots> hotspots) {
         this.file_url = file_url;
         this.date_captured = date_captured;
         this.gps_location = gps_location;
         this.width = width;
         this.height = height;
-        this.objectlist = objectlist;
+        this.hotspots = hotspots;
     }
 
     public String getFile_url() {
@@ -61,11 +62,11 @@ public class Image {
         this.height = height;
     }
 
-    public List<Object> getObjectlist() {
-        return objectlist;
+    public List<hotspots> getHotspots() {
+        return hotspots;
     }
 
-    public void setObjectlist(List<Object> objectlist) {
-        this.objectlist = objectlist;
+    public void setHotspots(List<hotspots> hotspots) {
+        this.hotspots = hotspots;
     }
 }

@@ -18,26 +18,26 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.ia_highway.bitmapHelper.BitmapHelper;
+import com.example.ia_highway.models.Coords;
 import com.example.ia_highway.models.ListHelper;
-import com.example.ia_highway.models.Point;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SomeView extends View implements View.OnTouchListener {
     private Paint paint;
-    public static List<Point> points;
+    public static List<Coords> points;
     int DIST = 2;
     boolean flgPathDraw = true;
 
-    Point mfirstpoint = null;
+    Coords mfirstpoint = null;
     boolean bfirstpoint = false;
 
-    Point mlastpoint = null;
+    Coords mlastpoint = null;
     int countPoints = 0;
     Bitmap bitmap = BitmapHelper.getInstance().getBitmap(); //get bitmap stored in instance
     Context mContext;
-    private static List<Point> listPoints;
+    private static List<Coords> coords;
 
     public SomeView(Context c) {
         super(c);
@@ -53,8 +53,8 @@ public class SomeView extends View implements View.OnTouchListener {
         paint.setColor(Color.WHITE);
 
         this.setOnTouchListener(this);
-        points = new ArrayList<Point>();
-        listPoints = new ArrayList<Point>();
+        points = new ArrayList<Coords>();
+        coords = new ArrayList<Coords>();
         bfirstpoint = false;
     }
 
@@ -70,7 +70,7 @@ public class SomeView extends View implements View.OnTouchListener {
         paint.setColor(Color.WHITE);
 
         this.setOnTouchListener(this);
-        points = new ArrayList<Point>();
+        points = new ArrayList<Coords>();
         bfirstpoint = false;
 
     }
@@ -83,12 +83,12 @@ public class SomeView extends View implements View.OnTouchListener {
         boolean first = true;
 
         for (int i = 0; i < points.size(); i += 2) {
-            Point point = points.get(i);
+            Coords point = points.get(i);
             if (first) {
                 first = false;
                 path.moveTo(point.x, point.y);
             } else if (i < points.size() - 1) {
-                Point next = points.get(i + 1);
+                Coords next = points.get(i + 1);
                 path.quadTo(point.x, point.y, next.x, next.y);
             } else {
                 mlastpoint = points.get(i);
@@ -102,7 +102,7 @@ public class SomeView extends View implements View.OnTouchListener {
         // if(event.getAction() != MotionEvent.ACTION_DOWN)
         // return super.onTouchEvent(event);
 
-        Point point = new Point();
+        Coords point = new Coords();
         point.x = (int) event.getX();
         point.y = (int) event.getY();
 
@@ -133,7 +133,7 @@ public class SomeView extends View implements View.OnTouchListener {
 
         //Copy the list to a new list 'listPoints' and delete the repetition of points
         if (countPoints % 2 == 0) {
-            listPoints.add(new Point(point.x, point.y));
+            coords.add(new Coords(point.x, point.y));
         }
         countPoints++;
         if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -152,7 +152,7 @@ public class SomeView extends View implements View.OnTouchListener {
         return true;
     }
 
-    private boolean comparepoint(Point first, Point current) {
+    private boolean comparepoint(Coords first, Coords current) {
         int left_range_x = (int) (current.x - 3);
         int left_range_y = (int) (current.y - 3);
 
@@ -173,7 +173,7 @@ public class SomeView extends View implements View.OnTouchListener {
     }
 
     public void fillinPartofPath() {
-        Point point = new Point();
+        Coords point = new Coords();
         point.x = points.get(0).x;
         point.y = points.get(0).y;
 
@@ -182,7 +182,7 @@ public class SomeView extends View implements View.OnTouchListener {
     }
 
     public void resetView() {
-        listPoints.clear();
+        coords.clear();
         points.clear();
         countPoints = 0;
         paint.setColor(Color.WHITE);
@@ -199,8 +199,8 @@ public class SomeView extends View implements View.OnTouchListener {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         // Yes button clicked
-                        Log.e("list", listPoints.toString());
-                        ListHelper.getInstance().setListPoints(listPoints);
+                        Log.e("list", coords.toString());
+                        ListHelper.getInstance().setCoords(coords);
                         ((Activity) mContext).finish();
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:

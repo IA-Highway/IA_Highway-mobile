@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ia_highway.adapters.MyAdapter;
-import com.example.ia_highway.models.Image;
+import com.example.ia_highway.models.imagemap;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,10 +30,10 @@ public class MetadoneeActivity extends AppCompatActivity implements View.OnClick
         //Firebase data to recycleView
         recyclerView = findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseRecyclerOptions<Image> options =
-                new FirebaseRecyclerOptions.Builder<Image>()
+        FirebaseRecyclerOptions<imagemap> options =
+                new FirebaseRecyclerOptions.Builder<imagemap>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("images"),
-                                Image.class)
+                                imagemap.class)
                         .build();
         myAdapter = new MyAdapter(options);
         recyclerView.setAdapter(myAdapter);
