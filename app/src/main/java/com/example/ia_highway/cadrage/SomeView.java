@@ -11,7 +11,9 @@ import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -77,8 +79,10 @@ public class SomeView extends View implements View.OnTouchListener {
 
 
     public void onDraw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, 0, 0, null);
-
+        int widtha= this.getResources().getDisplayMetrics().widthPixels;
+        int heighta= this.getResources().getDisplayMetrics().heightPixels;
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, widtha, heighta, true);
+        canvas.drawBitmap(resizedBitmap, 0, 0, null);
         Path path = new Path();
         boolean first = true;
 

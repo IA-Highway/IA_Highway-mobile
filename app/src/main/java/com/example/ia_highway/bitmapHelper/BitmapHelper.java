@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 public class BitmapHelper {
     private Bitmap bitmap;
     private static final BitmapHelper instance = new BitmapHelper();
-
+    
     public BitmapHelper() {
     }
 
