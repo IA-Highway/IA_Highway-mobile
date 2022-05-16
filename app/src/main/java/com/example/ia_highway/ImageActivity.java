@@ -74,12 +74,12 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     private String description;
     private boolean imageCharged = false;
     private List<Coords> listPoint;
-    private List<hotspots> objectList;
-    private List<Shape> polygonList;
-    private Float maxxa = 0f;
+    private List<hotspots> hotspotsList;
+    private Shape shape;
+   /* private Float maxxa = 0f;
     private Float maxya =0f;
     private Float minxa =0f;
-    private Float minya =0f;
+    private Float minya =0f;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,42 +155,42 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                                 DatabaseReference root = db.getReference("images");
 
                                 //getListFromPopUp
-                                objectList=new ArrayList<>();
-                                polygonList=new ArrayList<>();
+                                hotspotsList=new ArrayList<>();
                                 listPoint = ListHelper.getInstance().getCoords();
                                 Log.d("listAdded ", listPoint.toString());
-                                polygonList.add(new Shape(listPoint));
+
                                 //get min x y and max x y from polygon list which contains list of Point
-                                maxxa = getMaxX(polygonList.get(0).getCoords());
-                                maxya = getMaxY(polygonList.get(0).getCoords());
-                                minxa = getMinX(polygonList.get(0).getCoords());
-                                minya = getMinY(polygonList.get(0).getCoords());
-                                for (int i=1;i<polygonList.size();i++) {
-                                    if(getMaxX(polygonList.get(i).getCoords()) > maxxa){
-                                        maxxa = getMaxX(polygonList.get(i).getCoords());
+                                /*
+                                maxxa = getMaxX(shapeList.get(0).getCoords());
+                                maxya = getMaxY(shapeList.get(0).getCoords());
+                                minxa = getMinX(shapeList.get(0).getCoords());
+                                minya = getMinY(shapeList.get(0).getCoords());
+                                for (int i=1;i<shapeList.size();i++) {
+                                    if(getMaxX(shapeList.get(i).getCoords()) > maxxa){
+                                        maxxa = getMaxX(shapeList.get(i).getCoords());
                                     }
-                                    if(getMaxY(polygonList.get(i).getCoords()) > maxya){
-                                        maxya = getMaxY(polygonList.get(i).getCoords());
+                                    if(getMaxY(shapeList.get(i).getCoords()) > maxya){
+                                        maxya = getMaxY(shapeList.get(i).getCoords());
                                     }
-                                    if(getMinX(polygonList.get(i).getCoords()) < minxa){
-                                        minxa = getMinX(polygonList.get(i).getCoords());
+                                    if(getMinX(shapeList.get(i).getCoords()) < minxa){
+                                        minxa = getMinX(shapeList.get(i).getCoords());
                                     }
-                                    if(getMinY(polygonList.get(i).getCoords()) < minya){
-                                        minya = getMinY(polygonList.get(i).getCoords());
+                                    if(getMinY(shapeList.get(i).getCoords()) < minya){
+                                        minya = getMinY(shapeList.get(i).getCoords());
                                     }
                                 }
                                 Log.d("maxxa->","maxxa"+maxxa);
                                 Log.d("maxya->","maxya"+maxya);
                                 Log.d("minxa->","minxa"+minxa);
-                                Log.d("minya->","minya"+minya);
-                                objectList.add(new hotspots(description,polygonList,minya,minxa,maxya,maxxa));
-                                Log.d("Objectlist->","--->  "+objectList.toString());
+                                Log.d("minya->","minya"+minya);*/
+                                hotspotsList.add(new hotspots(description,new Shape(listPoint)));
+                                Log.d("hotspotsList->","--->  "+hotspotsList.toString());
 
                                 gps_location location =
                                         new gps_location(longitude, latitude);
 
                                 imagemap image = new imagemap(uri.toString(), capturedDate.toString(),
-                                        location, width, height,objectList);
+                                        location, width, height,hotspotsList);
 
                                 root.child(imageName).setValue(image);
                                 Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_LONG).show();

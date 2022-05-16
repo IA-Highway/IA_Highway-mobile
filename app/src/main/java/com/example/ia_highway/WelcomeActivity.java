@@ -63,7 +63,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if(v== button_welcome_view) {
-            Intent it=new Intent(this,ImageActivity.class);
+            Intent it=new Intent(this,MetadoneeActivity.class);
             startActivity(it);
             finish();
         }
