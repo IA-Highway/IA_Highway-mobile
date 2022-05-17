@@ -191,6 +191,7 @@ public class SomeView extends View implements View.OnTouchListener {
         countPoints = 0;
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.STROKE);
+        
         flgPathDraw = true;
         invalidate();
     }
@@ -217,8 +218,8 @@ public class SomeView extends View implements View.OnTouchListener {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setMessage("Voulez vous continuez?")
-                .setPositiveButton("Ajouté", dialogClickListener)
-                .setNegativeButton("Modifier", dialogClickListener).show()
+                .setPositiveButton("Envoyer", dialogClickListener)
+                .setNegativeButton("Réessayer", dialogClickListener).show()
                 .setCancelable(false);
     }
 }
