@@ -191,7 +191,7 @@ public class SomeView extends View implements View.OnTouchListener {
         countPoints = 0;
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.STROKE);
-        
+        bfirstpoint=false;
         flgPathDraw = true;
         invalidate();
     }
