@@ -26,13 +26,12 @@ public class MyAdapter extends FirebaseRecyclerAdapter<imagemap, MyAdapter.myvie
             holder.description.setText(model.getHotspots().get(0).getName().toString());
         } else
             holder.description.setText("delete null ");
-
+        holder.date.setText(model.getDate_captured());
         //Convert String to int and get the Integer Value
         double longitude = model.getGps_location().getLongitude();
         double latitude = model.getGps_location().getLatitude();
         int longitudeSimplifie = (int) longitude;
         int latitudeSimplifie = (int) latitude;
-
         holder.location.setText(longitudeSimplifie + ", " + latitudeSimplifie);
         Glide.with(holder.img.getContext()).load(model.getFile_url()).into(holder.img);
     }

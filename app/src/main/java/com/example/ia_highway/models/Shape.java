@@ -3,27 +3,28 @@ package com.example.ia_highway.models;
 import java.util.List;
 
 public class Shape {
-    private List<Coords> coords;
+    private List<Double> coords;
 
     public Shape() {
     }
 
-    public Shape(List<Coords> coords) {
+    public Shape(List<Double> coords) {
         this.coords = coords;
     }
 
-    public List<Coords> getCoords() {
+
+    public List<Double> getCoords() {
         return coords;
     }
 
-    public void setCoords(List<Coords> coords) {
+    public void setCoords(List<Double> coords) {
         this.coords = coords;
     }
 
     @Override
     public String toString() {
-        return "Polygon{" +
-                "pointList=" + coords.toString() +
+        return "Shape{" +
+                "Doubles=" + coords +
                 '}';
     }
 }

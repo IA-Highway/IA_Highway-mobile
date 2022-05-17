@@ -6,14 +6,14 @@ public class imagemap {
     String file_url;
     String date_captured;
     gps_location gps_location;
-    double width, height;
+    String width, height;
     List<hotspots> hotspots;
 
     public imagemap() {
 
     }
 
-    public imagemap(String file_url, String date_captured, com.example.ia_highway.models.gps_location gps_location, double width, double height, List<hotspots> hotspots) {
+    public imagemap(String file_url, String date_captured, com.example.ia_highway.models.gps_location gps_location, String width, String height, List<hotspots> hotspots) {
         this.file_url = file_url;
         this.date_captured = date_captured;
         this.gps_location = gps_location;
@@ -46,19 +46,19 @@ public class imagemap {
         this.gps_location = gps_location;
     }
 
-    public double getWidth() {
+    public String getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(String width) {
         this.width = width;
     }
 
-    public double getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 

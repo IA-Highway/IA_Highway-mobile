@@ -37,12 +37,12 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.ia_highway.bitmapHelper.BitmapHelper;
 import com.example.ia_highway.cadrage.PopUp;
-import com.example.ia_highway.models.hotspots;
-import com.example.ia_highway.models.ListHelper;
-import com.example.ia_highway.models.imagemap;
 import com.example.ia_highway.models.Coords;
+import com.example.ia_highway.models.ListHelper;
 import com.example.ia_highway.models.Shape;
 import com.example.ia_highway.models.gps_location;
+import com.example.ia_highway.models.hotspots;
+import com.example.ia_highway.models.imagemap;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -155,7 +155,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                                 DatabaseReference root = db.getReference("images");
 
                                 //getListFromPopUp
-                                hotspotsList=new ArrayList<>();
+                                hotspotsList = new ArrayList<>();
                                 listPoint = ListHelper.getInstance().getCoords();
                                 Log.d("listAdded ", listPoint.toString());
 
@@ -183,14 +183,16 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                                 Log.d("maxya->","maxya"+maxya);
                                 Log.d("minxa->","minxa"+minxa);
                                 Log.d("minya->","minya"+minya);*/
-                                hotspotsList.add(new hotspots(description,new Shape(listPoint)));
-                                Log.d("hotspotsList->","--->  "+hotspotsList.toString());
+
+                                hotspotsList.add(new hotspots(description, new Shape(convertList(listPoint))));
+                                Log.d("hotspotsList->", "--->  " + hotspotsList.toString());
 
                                 gps_location location =
                                         new gps_location(longitude, latitude);
 
+
                                 imagemap image = new imagemap(uri.toString(), capturedDate.toString(),
-                                        location, width, height,hotspotsList);
+                                        location, width+"", height+"", hotspotsList);
 
                                 root.child(imageName).setValue(image);
                                 Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_LONG).show();
@@ -204,6 +206,16 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
 
+    }
+
+    private List<Double> convertList(List<Coords> listPoint) {
+        List<Double> integers = new ArrayList<>();
+        for (Coords c : listPoint) {
+            integers.add((double) c.x);
+            integers.add((double) c.y);
+        }
+        Log.d("TAG", integers.toString());
+        return integers;
     }
 
     @Override
@@ -320,8 +332,9 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     public void onProviderDisabled(@NonNull String provider) {
         LocationListener.super.onProviderDisabled(provider);
     }
+
     // get max x from Point list
-    private Float getMaxX(List<Coords> point){
+    private Float getMaxX(List<Coords> point) {
         Float max = point.get(0).x;
         for (int i = 1; i < point.size(); i++) {
             if (point.get(i).x > max) {
@@ -330,8 +343,9 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         }
         return max;
     }
+
     // get max Y from Point list
-    private Float getMaxY(List<Coords> point){
+    private Float getMaxY(List<Coords> point) {
         Float max = point.get(0).y;
         for (int i = 1; i < point.size(); i++) {
             if (point.get(i).y > max) {
@@ -340,8 +354,9 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         }
         return max;
     }
+
     // get min Y from Point list
-    private Float getMinY(List<Coords> point){
+    private Float getMinY(List<Coords> point) {
         Float min = point.get(0).y;
         for (int i = 1; i < point.size(); i++) {
             if (point.get(i).y < min) {
@@ -350,8 +365,9 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         }
         return min;
     }
+
     // get min X from Point list
-    private Float getMinX(List<Coords> point){
+    private Float getMinX(List<Coords> point) {
         Float min = point.get(0).x;
         for (int i = 1; i < point.size(); i++) {
             if (point.get(i).x < min) {
