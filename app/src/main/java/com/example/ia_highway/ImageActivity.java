@@ -186,13 +186,18 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
 
                                 hotspotsList.add(new hotspots(description, new Shape(convertList(listPoint))));
                                 Log.d("hotspotsList->", "--->  " + hotspotsList.toString());
-
-                                gps_location location =
-                                        new gps_location(longitude, latitude);
+                                gps_location location;
+                                if (longitude == null || latitude == null) {
+                                    location =
+                                            new gps_location(0, 0);
+                                } else {
+                                    location =
+                                            new gps_location(longitude, latitude);
+                                }
 
 
                                 imagemap image = new imagemap(uri.toString(), capturedDate.toString(),
-                                        location, width+"", height+"", hotspotsList);
+                                        location, width + "", height + "", hotspotsList);
 
                                 root.child(imageName).setValue(image);
                                 Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_LONG).show();
